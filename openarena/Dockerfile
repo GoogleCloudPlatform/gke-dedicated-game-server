@@ -12,15 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 FROM debian:jessie
-MAINTAINER Joseph Holley joeholley@google.com
+LABEL maintainer="Joseph Holley joeholley@google.com"
 
-RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
-RUN apt-get update
-RUN apt-get -y upgrade
-RUN apt-get -y install openarena-server
-
-RUN apt-get clean
-RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections && \
+    apt-get update && \
+    apt-get -y upgrade && \
+    apt-get -y install openarena-server && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ENV WDIR /root/.openarena/baseoa
 WORKDIR $WDIR

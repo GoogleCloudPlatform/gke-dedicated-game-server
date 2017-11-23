@@ -12,18 +12,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 FROM google/cloud-sdk
-MAINTAINER Joseph Holley joeholley@google.com
+LABEL maintainer="Joseph Holley joeholley@google.com"
 
 # Update gcloud componenets used by this container
-RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
-RUN apt-get update
-RUN apt-get -y install --upgrade gnupg google-cloud-sdk gpgv kubectl bc
-RUN apt-get clean
-RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections && \
+    apt-get update && \
+    apt-get -y install --upgrade gnupg google-cloud-sdk gpgv kubectl bc && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ENV WDIR /home/openarena
-WORKDIR $WDIR 
-RUN mkdir -p $WDIR 
+WORKDIR $WDIR
+RUN mkdir -p $WDIR
 ADD ./node-stopper.sh $WDIR/node-stopper.sh
 
 ENTRYPOINT ["/bin/bash"]
