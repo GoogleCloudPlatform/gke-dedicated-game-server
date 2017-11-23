@@ -21,5 +21,6 @@ for i in $(seq 1 20); do
   echo "Starting 'openarena.dgs.${i}' DGS pod (replaces any exising pod with the same name)"
   kubectl delete pods openarena.dgs.$i 2>&1 | grep -v "NotFound"
   sleep 15
-  sed "s/openarena\.dgs/openarena.dgs.$i/g" ../../openarena/k8s/testoarenapod.yaml | kubectl apply -f -
+  sed "s/openarena\.dgs/openarena.dgs.$i/g" "$( cd $(dirname $0) ; \
+    pwd -P )/../../openarena/k8s/openarena-pod.yaml" | kubectl apply -f -
 done
