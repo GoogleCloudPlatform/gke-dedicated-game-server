@@ -1,0 +1,52 @@
+# Copyright 2017 Google Inc. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+apiVersion: apps/v1beta1 
+kind: Deployment
+metadata:
+  labels:
+    app: oarena.scaling-manager 
+  name: scaling-manager 
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: oarena.scaling-manager
+      name: scaling-manager 
+    spec:
+      containers:
+        - name: scaling-manager 
+          image: [REGION].gcr.io/[PROJECT_ID]/scaling-manager
+          env:
+          - name: K8S_CLUSTER
+            value: "openarena-cluster"
+          - name: GKE_BASE_INSTANCE_NAME
+            value: "gke-openarena-cluster-default-pool-[REPLACE_ME]"
+          - name: GCP_ZONE
+            value: "us-central1-b"
+        - name: node-stopper 
+          image: [REGION].gcr.io/[PROJECT_ID]/node-stopper
+          env:
+          - name: K8S_CLUSTER
+            value: "openarena-cluster"
+          - name: GKE_BASE_INSTANCE_NAME
+            value: "gke-openarena-cluster-default-pool-[REPLACE_ME]"
+          - name: GCP_ZONE
+            value: "us-central1-b"
+        - name: kubectl-proxy
+          # Sidecar kubectl proxy container, defaults to port 8001
+          # https://github.com/kubernetes/examples/tree/master/staging/kubectl-container/
+          image: [REGION].gcr.io/[PROJECT_ID]/kubectl
+          args:
+            - "proxy"
