@@ -19,7 +19,7 @@ if [ -z "${PROJECT_ID}" -o -z "${REGION}" ]; then
   echo -n "variables to determine the target gcr.io registry: "
   echo '${REGION}.gcr.io/${PROJECT_ID}/'
   echo "More details at: "
-  echo -n "https://cloud.google.com/container-registry/
+  echo -n "https://cloud.google.com/container-registry/"
   echo "docs/pushing-and-pulling#choosing_a_registry_name"
   exit 1
 fi
