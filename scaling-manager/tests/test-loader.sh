@@ -16,11 +16,11 @@
 # Check for kubectl in local path.
 command -v kubectl >/dev/null 2>&1 || { echo >&2 "Command kubectl required in $PATH to use this script, exiting"; exit 1; }
 
-# Loop 20 times, start one pod every 15 seconds.
-for i in $(seq 1 20); do
+# Loop 15 times, start one pod every ~20 seconds.
+for i in $(seq 1 15); do
   echo "Starting 'openarena.dgs.${i}' DGS pod (replaces any exising pod with the same name)"
   kubectl delete pods openarena.dgs.$i 2>&1 | grep -v "NotFound"
-  sleep 15
+  sleep 20 
   sed "s/openarena\.dgs/openarena.dgs.$i/g" "$( cd $(dirname $0) ; \
     pwd -P )/../../openarena/k8s/openarena-pod.yaml" | kubectl apply -f -
 done
