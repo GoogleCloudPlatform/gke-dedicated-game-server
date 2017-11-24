@@ -17,12 +17,12 @@ metadata:
   name: openarena.dgs
   labels:
     game: openarena
-    role: dgs 
+    role: dgs
 spec:
   hostNetwork: true
   restartPolicy: Never
   volumes:
-  - name: data 
+  - name: data
     # This GCE PD must already exist.
     persistentVolumeClaim:
       claimName: asset.disk.claim
@@ -34,6 +34,6 @@ spec:
       requests:
         cpu: 990m
     volumeMounts:
-    - mountPath:
-      name: assets
+    - mountPath: /usr/share/games/openarena/baseoa
+      name: data
       readOnly: true
