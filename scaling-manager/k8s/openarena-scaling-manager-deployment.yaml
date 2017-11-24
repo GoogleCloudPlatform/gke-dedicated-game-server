@@ -34,7 +34,7 @@ spec:
           - name: GKE_BASE_INSTANCE_NAME
             value: "gke-openarena-cluster-default-pool-[REPLACE_ME]"
           - name: GCP_ZONE
-            value: "[REGION]"
+            value: "[ZONE]"
         - name: node-stopper 
           image: [REGION].gcr.io/[PROJECT_ID]/node-stopper
           env:
@@ -43,7 +43,7 @@ spec:
           - name: GKE_BASE_INSTANCE_NAME
             value: "gke-openarena-cluster-default-pool-[REPLACE_ME]"
           - name: GCP_ZONE
-            value: "[REGION]"
+            value: "[ZONE]"
         - name: kubectl-proxy
           # Sidecar kubectl proxy container, defaults to port 8001
           # https://github.com/kubernetes/examples/tree/master/staging/kubectl-container/
