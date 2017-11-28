@@ -32,4 +32,4 @@ EXPOSE 27950/udp
 EXPOSE 27960/udp
 
 ENTRYPOINT ["/usr/games/openarena-server"]
-CMD ["+exec", "single-match.cfg"]
+CMD ["+exec", "single-match.cfg", "+set", "dedicated", "1", "+set", "net_port", "27961"]
