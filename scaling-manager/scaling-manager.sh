@@ -126,15 +126,15 @@ while true; do
             abandon-instances ${GKE_BASE_INSTANCE_NAME}-grp \
             --instances=${NODE_TO_REMOVE} &
           # K8S nodes that aren't properly flagged as unschedulable won't be
-          # stopped by the node stopper script, so do a naive loop to ensure 
-          for i in $(seq 1 20); do if (kubectl cordon ${NODE_TO_REMOVE}); then break; fi; sleep 3; done &
+          # stopped by the node stopper script, so do a naive 5 min loop to ensure 
+          for i in $(seq 1 1000); do if (kubectl cordon ${NODE_TO_REMOVE}); then break; fi; sleep 3; done &
         done
 
-        # Wait for background processes to complete.
-        wait
+        # Give some time for background processes to complete before looping.
+        sleep 30 
 
       else
-        # Target number of nodes not within the min/max range 
+        # Target number of nodes not within the min/max range. 
         echo -n "No! Sleeping."
       fi
 
