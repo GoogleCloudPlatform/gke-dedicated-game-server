@@ -14,10 +14,10 @@
 # limitations under the License.
 DOCKERFILES=$( ls Dockerfile.* | cut -d'.' -f2 )
 
-if [ -z "${PROJECT_ID}" -o -z "${REGION}" ]; then
+if [ -z "${PROJECT_ID}" -o -z "${GCR_REGION}" ]; then
   echo -n "This script requires the REGION and PROJECT_ID environment "
   echo -n "variables to determine the target gcr.io registry: "
-  echo '${REGION}.gcr.io/${PROJECT_ID}/'
+  echo '${GCR_REGION}.gcr.io/${PROJECT_ID}/'
   echo "More details at: "
   echo -n "https://cloud.google.com/container-registry/"
   echo "docs/pushing-and-pulling#choosing_a_registry_name"
@@ -26,6 +26,6 @@ fi
 
 for FILE in ${DOCKERFILES}; do
   docker build -f \
-    Dockerfile.${FILE} -t ${REGION}.gcr.io/${PROJECT_ID}/${FILE}:latest .
-  gcloud docker -- push ${REGION}.gcr.io/${PROJECT_ID}/${FILE}:latest
+    Dockerfile.${FILE} -t ${GCR_REGION}.gcr.io/${PROJECT_ID}/${FILE}:latest .
+  gcloud docker -- push ${GCR_REGION}.gcr.io/${PROJECT_ID}/${FILE}:latest
 done
