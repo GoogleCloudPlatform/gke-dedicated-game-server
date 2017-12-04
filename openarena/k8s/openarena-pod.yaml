@@ -30,6 +30,7 @@ spec:
   containers:
   - image: [REGION].gcr.io/[PROJECT_ID]/openarena:0.8.8
     name: openarena-dgs
+    args: ["+exec", "single-match.cfg", "+set", "dedicated", "1", "+set", "net_port", "27961"]
     resources:
       requests:
         cpu: 990m
