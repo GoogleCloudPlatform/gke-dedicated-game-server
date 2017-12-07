@@ -15,7 +15,7 @@
 DOCKERFILES=$( ls Dockerfile.* | cut -d'.' -f2 )
 
 if [ -z "${PROJECT_ID}" -o -z "${GCR_REGION}" ]; then
-  echo -n "This script requires the REGION and PROJECT_ID environment "
+  echo -n "This script requires the GCR_REGION and PROJECT_ID environment "
   echo -n "variables to determine the target gcr.io registry: "
   echo '${GCR_REGION}.gcr.io/${PROJECT_ID}/'
   echo "More details at: "

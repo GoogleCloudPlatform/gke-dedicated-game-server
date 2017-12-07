@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
         - name: scaling-manager 
-          image: [REGION].gcr.io/[PROJECT_ID]/scaling-manager
+          image: [GCR_REGION].gcr.io/[PROJECT_ID]/scaling-manager
           env:
           - name: K8S_CLUSTER
             value: "openarena-cluster"
@@ -36,7 +36,7 @@ spec:
           - name: GCP_ZONE
             value: "[ZONE]"
         - name: node-stopper 
-          image: [REGION].gcr.io/[PROJECT_ID]/node-stopper
+          image: [GCR_REGION].gcr.io/[PROJECT_ID]/node-stopper
           env:
           - name: K8S_CLUSTER
             value: "openarena-cluster"
@@ -47,6 +47,6 @@ spec:
         - name: kubectl-proxy
           # Sidecar kubectl proxy container, defaults to port 8001
           # https://github.com/kubernetes/examples/tree/master/staging/kubectl-container/
-          image: [REGION].gcr.io/[PROJECT_ID]/kubectl
+          image: [GCR_REGION].gcr.io/[PROJECT_ID]/kubectl
           args:
             - "proxy"
