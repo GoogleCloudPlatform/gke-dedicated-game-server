@@ -1,7 +1,8 @@
 # Running Dedicated Game Servers in Kubernetes Engine
 
-This is a repository with sample code to go along with the tutorial at [final URL] and
-is provided for reference. It is not intended to be used in production, but to
+This is a repository with sample code to go along with the tutorial at 
+https://cloud.google.com/solutions/gaming/running-dedicated-game-servers-in-kubernetes-engine
+and is provided for reference. It is not intended to be used in production, but to
 serve as a learning tool and starting point for running dedicated game servers
 in GKE.
 
@@ -11,10 +12,10 @@ in GKE.
   other environments with a little work.
 - Building docker images from the provided `Dockerfile`s requires an environment 
   with Docker installed as per the 
-  [https://docs.docker.com/engine/installation/|Docker documentation].
+  [Docker documentation](https://docs.docker.com/engine/installation/).
 - If you want to test a connection to the OpenArena server running on GKE at the
   end of the tutorial, you'll need to
-  [http://openarena.wikia.com/wiki/Manual/Install|install the OpenArena client].
+  [install the OpenArena client](http://openarena.wikia.com/wiki/Manual/Install).
 
 ## Componenets
 
@@ -27,6 +28,6 @@ it as a pod on GKE.
 ### Scaling Manager
 
 These two scripts are used to scale up and down the number of nodes in the GKE
-cluster as outlined in the [URL|tutorial]. Dockerfiles and Kubernetes resource
+cluster as outlined in the tutorial. Dockerfiles and Kubernetes resource
 definitions (in YAML format) are included to containerize these scripts and run
 them as a deployment on GKE.
