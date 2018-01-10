@@ -12,14 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 FROM google/cloud-sdk
-MAINTAINER Joseph Holley joeholley@google.com
+LABEL maintainer="Joseph Holley joeholley@google.com"
 
-# Update gcloud componenets used by this container
-RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
-RUN apt-get update
-RUN apt-get -y install --upgrade kubectl
-RUN apt-get clean
-RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections && \
+    apt-get update && \
+    apt-get -y upgrade && \
+    apt-get -y install --upgrade kubectl && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ENTRYPOINT ["/usr/bin/kubectl"]
 CMD ["proxy"]
